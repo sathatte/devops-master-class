@@ -1,10 +1,13 @@
 provider "aws" {
-  region  = "us-east-1"
+  region = "us-east-1"
   //version = "~> 2.46"
 }
 
 resource "aws_default_vpc" "default" {
 
+  tags = {
+    yor_trace = "b61d6a01-8d89-4593-a9c5-c940533b57a9"
+  }
 }
 
 resource "aws_security_group" "http_server_sg" {
@@ -34,7 +37,8 @@ resource "aws_security_group" "http_server_sg" {
   }
 
   tags = {
-    name = "http_server_sg"
+    name      = "http_server_sg"
+    yor_trace = "da509888-85b1-4858-b14e-251f07e07d73"
   }
 }
 
@@ -48,4 +52,7 @@ resource "aws_instance" "http_server" {
 
   //subnet_id              = "subnet-3f7b2563"
   subnet_id = tolist(data.aws_subnet_ids.default_subnets.ids)[0]
+  tags = {
+    yor_trace = "226fc62d-8da4-40c4-8287-7ee297119c37"
+  }
 }

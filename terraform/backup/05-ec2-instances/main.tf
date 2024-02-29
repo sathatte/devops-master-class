@@ -1,10 +1,13 @@
 provider "aws" {
-  region  = "us-east-1"
+  region = "us-east-1"
   //version = "~> 2.46" (No longer necessary)
 }
 
 resource "aws_default_vpc" "default" {
 
+  tags = {
+    yor_trace = "ebe06025-bb7a-4c65-97cb-bf2879098b8d"
+  }
 }
 
 resource "aws_security_group" "http_server_sg" {
@@ -34,7 +37,8 @@ resource "aws_security_group" "http_server_sg" {
   }
 
   tags = {
-    name = "http_server_sg"
+    name      = "http_server_sg"
+    yor_trace = "d12fc6dd-1005-4be8-be44-d36ee95f7af0"
   }
 }
 
@@ -61,5 +65,8 @@ resource "aws_instance" "http_server" {
       "sudo service httpd start",
       "echo Welcome to in28minutes - Virtual Server is at ${self.public_dns} | sudo tee /var/www/html/index.html"
     ]
+  }
+  tags = {
+    yor_trace = "2a1ffe21-91cb-45e0-b369-987d101f12ed"
   }
 }

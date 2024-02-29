@@ -1,10 +1,13 @@
 provider "aws" {
-  region  = "us-east-1"
+  region = "us-east-1"
   //version = "~> 2.46"
 }
 
 resource "aws_default_vpc" "default" {
 
+  tags = {
+    yor_trace = "20309acb-ec08-4760-9fae-3eebfb5d66cf"
+  }
 }
 
 resource "aws_security_group" "http_server_sg" {
@@ -34,7 +37,8 @@ resource "aws_security_group" "http_server_sg" {
   }
 
   tags = {
-    name = "http_server_sg"
+    name      = "http_server_sg"
+    yor_trace = "ae3f47d5-aa99-47b0-92e2-314a55249224"
   }
 }
 
@@ -56,6 +60,9 @@ resource "aws_security_group" "elb_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  tags = {
+    yor_trace = "bbe76747-e581-4fb1-942c-b7311b71fa36"
+  }
 }
 
 resource "aws_elb" "elb" {
@@ -69,6 +76,9 @@ resource "aws_elb" "elb" {
     instance_protocol = "http"
     lb_port           = 80
     lb_protocol       = "http"
+  }
+  tags = {
+    yor_trace = "39c0a3de-a473-4ff3-b6da-62e82dceb3c5"
   }
 }
 
@@ -84,6 +94,7 @@ resource "aws_instance" "http_servers" {
 
   tags = {
     name : "http_servers_${each.value}"
+    yor_trace = "a243fbdb-3910-48e0-931c-3d64d431eb49"
   }
 
   connection {
