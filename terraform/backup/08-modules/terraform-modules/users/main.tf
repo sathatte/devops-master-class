@@ -1,16 +1,19 @@
 variable "environment" {
-    default = "default"
+  default = "default"
 }
 
 provider "aws" {
-    region = "us-east-1"
-   // version = "~> 2.46"
+  region = "us-east-1"
+  // version = "~> 2.46"
 }
 
 resource "aws_iam_user" "my_iam_user" {
-    name = "${local.iam_user_extension}_${var.environment}"
+  name = "${local.iam_user_extension}_${var.environment}"
+  tags = {
+    yor_trace = "0d1f033f-70e1-40cb-9ea7-5e206ac7c2aa"
+  }
 }
 
 locals {
-    iam_user_extension = "my_iam_user_abc"
+  iam_user_extension = "my_iam_user_abc"
 }

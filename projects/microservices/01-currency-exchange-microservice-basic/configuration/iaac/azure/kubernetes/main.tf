@@ -1,6 +1,9 @@
 resource "azurerm_resource_group" "resource_group" {
   name     = "${var.resource_group}_${var.environment}"
   location = var.location
+  tags = {
+    yor_trace = "5aa60e3b-b35d-48b4-b648-cdd1c4833140"
+  }
 }
 
 provider "azurerm" {
@@ -23,9 +26,9 @@ resource "azurerm_kubernetes_cluster" "terraform-k8s" {
   }
 
   default_node_pool {
-    name            = "agentpool"
-    node_count      = var.node_count
-    vm_size         = "standard_b2ms"
+    name       = "agentpool"
+    node_count = var.node_count
+    vm_size    = "standard_b2ms"
     # vm_size         = "standard_d2as_v5"      CHANGE IF AN ERROR ARISES 
   }
 
@@ -36,6 +39,7 @@ resource "azurerm_kubernetes_cluster" "terraform-k8s" {
 
   tags = {
     Environment = var.environment
+    yor_trace   = "2b2b87a6-9a8d-4053-9eae-dfb376c25000"
   }
 }
 

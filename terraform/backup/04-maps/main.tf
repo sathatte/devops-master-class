@@ -7,7 +7,7 @@ variable "users" {
 }
 
 provider "aws" {
-  region  = "us-east-1"
+  region = "us-east-1"
   //version = "~> 2.46" (No longer necessary)
 }
 
@@ -18,5 +18,6 @@ resource "aws_iam_user" "my_iam_users" {
     #country: each.value
     country : each.value.country
     department : each.value.department
+    yor_trace = "39e8c45e-c26d-4f32-825e-ee687f409abd"
   }
 }
